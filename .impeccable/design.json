@@ -1,0 +1,584 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-13T20:58:28.845506+00:00",
+  "title": "Design System: ZioAnacleto",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Deep Lagoon Teal",
+        "dark": "#82d5c1",
+        "tonalRamp": [
+          "#00201a",
+          "#00382f",
+          "#005045",
+          "#006b5c",
+          "#2a8a77",
+          "#82d5c1",
+          "#9ef2dc",
+          "#c8fff0"
+        ]
+      },
+      "on-primary": {
+        "role": "primary",
+        "displayName": "On Lagoon",
+        "dark": "#00382f",
+        "tonalRamp": [
+          "#00201a",
+          "#00382f",
+          "#005045",
+          "#006b5c",
+          "#2a8a77",
+          "#82d5c1",
+          "#9ef2dc",
+          "#c8fff0"
+        ]
+      },
+      "primary-container": {
+        "role": "primary",
+        "displayName": "Seafoam Mint",
+        "dark": "#005045",
+        "tonalRamp": [
+          "#00201a",
+          "#00382f",
+          "#005045",
+          "#006b5c",
+          "#2a8a77",
+          "#82d5c1",
+          "#9ef2dc",
+          "#c8fff0"
+        ]
+      },
+      "on-primary-container": {
+        "role": "primary",
+        "displayName": "Abyss Teal",
+        "dark": "#9ef2dc",
+        "tonalRamp": [
+          "#00201a",
+          "#00382f",
+          "#005045",
+          "#006b5c",
+          "#2a8a77",
+          "#82d5c1",
+          "#9ef2dc",
+          "#c8fff0"
+        ]
+      },
+      "primary-fixed-dim": {
+        "role": "primary",
+        "displayName": "Dimmed Mint",
+        "dark": "#82d5c1",
+        "tonalRamp": [
+          "#00201a",
+          "#00382f",
+          "#005045",
+          "#006b5c",
+          "#2a8a77",
+          "#82d5c1",
+          "#9ef2dc",
+          "#c8fff0"
+        ]
+      },
+      "secondary-container": {
+        "role": "secondary",
+        "displayName": "Pale Celadon",
+        "dark": "#334b45",
+        "tonalRamp": [
+          "#06201b",
+          "#1c352f",
+          "#334b45",
+          "#4a635d",
+          "#7c958e",
+          "#b1ccc4",
+          "#cce8e0",
+          "#e6f4f0"
+        ]
+      },
+      "on-secondary-container": {
+        "role": "secondary",
+        "displayName": "Deep Celadon",
+        "dark": "#cce8e0",
+        "tonalRamp": [
+          "#06201b",
+          "#1c352f",
+          "#334b45",
+          "#4a635d",
+          "#7c958e",
+          "#b1ccc4",
+          "#cce8e0",
+          "#e6f4f0"
+        ]
+      },
+      "tertiary": {
+        "role": "tertiary",
+        "displayName": "Burnt Apricot",
+        "dark": "#ffb871",
+        "tonalRamp": [
+          "#2d1600",
+          "#4a2800",
+          "#6a3c00",
+          "#8b5000",
+          "#b87420",
+          "#ffb871",
+          "#ffdcbe",
+          "#ffeedf"
+        ]
+      },
+      "on-tertiary": {
+        "role": "tertiary",
+        "displayName": "On Apricot",
+        "dark": "#4a2800",
+        "tonalRamp": [
+          "#2d1600",
+          "#4a2800",
+          "#6a3c00",
+          "#8b5000",
+          "#b87420",
+          "#ffb871",
+          "#ffdcbe",
+          "#ffeedf"
+        ]
+      },
+      "tertiary-container": {
+        "role": "tertiary",
+        "displayName": "Peach Cream",
+        "dark": "#6a3c00",
+        "tonalRamp": [
+          "#2d1600",
+          "#4a2800",
+          "#6a3c00",
+          "#8b5000",
+          "#b87420",
+          "#ffb871",
+          "#ffdcbe",
+          "#ffeedf"
+        ]
+      },
+      "on-tertiary-container": {
+        "role": "tertiary",
+        "displayName": "Cocoa",
+        "dark": "#ffdcbe",
+        "tonalRamp": [
+          "#2d1600",
+          "#4a2800",
+          "#6a3c00",
+          "#8b5000",
+          "#b87420",
+          "#ffb871",
+          "#ffdcbe",
+          "#ffeedf"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Mist Paper",
+        "dark": "#0e1513",
+        "tonalRamp": [
+          "#09100e",
+          "#161d1b",
+          "#2b3230",
+          "#3f4946",
+          "#6f7976",
+          "#bfc9c5",
+          "#dde4e1",
+          "#f4fbf8"
+        ]
+      },
+      "surface-container-lowest": {
+        "role": "neutral",
+        "displayName": "Surface Lowest",
+        "dark": "#09100e",
+        "tonalRamp": [
+          "#09100e",
+          "#161d1b",
+          "#2b3230",
+          "#3f4946",
+          "#6f7976",
+          "#bfc9c5",
+          "#dde4e1",
+          "#f4fbf8"
+        ]
+      },
+      "surface-container-low": {
+        "role": "neutral",
+        "displayName": "Surface Low",
+        "dark": "#161d1b",
+        "tonalRamp": [
+          "#09100e",
+          "#161d1b",
+          "#2b3230",
+          "#3f4946",
+          "#6f7976",
+          "#bfc9c5",
+          "#dde4e1",
+          "#f4fbf8"
+        ]
+      },
+      "surface-container": {
+        "role": "neutral",
+        "displayName": "Surface Container",
+        "dark": "#1a211f",
+        "tonalRamp": [
+          "#09100e",
+          "#161d1b",
+          "#2b3230",
+          "#3f4946",
+          "#6f7976",
+          "#bfc9c5",
+          "#dde4e1",
+          "#f4fbf8"
+        ]
+      },
+      "surface-container-high": {
+        "role": "neutral",
+        "displayName": "Surface High",
+        "dark": "#252b29",
+        "tonalRamp": [
+          "#09100e",
+          "#161d1b",
+          "#2b3230",
+          "#3f4946",
+          "#6f7976",
+          "#bfc9c5",
+          "#dde4e1",
+          "#f4fbf8"
+        ]
+      },
+      "surface-container-highest": {
+        "role": "neutral",
+        "displayName": "Surface Highest",
+        "dark": "#2f3634",
+        "tonalRamp": [
+          "#09100e",
+          "#161d1b",
+          "#2b3230",
+          "#3f4946",
+          "#6f7976",
+          "#bfc9c5",
+          "#dde4e1",
+          "#f4fbf8"
+        ]
+      },
+      "on-surface": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "dark": "#dde4e1",
+        "tonalRamp": [
+          "#09100e",
+          "#161d1b",
+          "#2b3230",
+          "#3f4946",
+          "#6f7976",
+          "#bfc9c5",
+          "#dde4e1",
+          "#f4fbf8"
+        ]
+      },
+      "on-surface-variant": {
+        "role": "neutral",
+        "displayName": "Slate Moss",
+        "dark": "#bfc9c5",
+        "tonalRamp": [
+          "#09100e",
+          "#161d1b",
+          "#2b3230",
+          "#3f4946",
+          "#6f7976",
+          "#bfc9c5",
+          "#dde4e1",
+          "#f4fbf8"
+        ]
+      },
+      "outline": {
+        "role": "neutral",
+        "displayName": "Outline",
+        "dark": "#899390",
+        "tonalRamp": [
+          "#09100e",
+          "#161d1b",
+          "#2b3230",
+          "#3f4946",
+          "#6f7976",
+          "#bfc9c5",
+          "#dde4e1",
+          "#f4fbf8"
+        ]
+      },
+      "inverse-surface": {
+        "role": "neutral",
+        "displayName": "Inverse Surface",
+        "dark": "#dde4e1",
+        "tonalRamp": [
+          "#09100e",
+          "#161d1b",
+          "#2b3230",
+          "#3f4946",
+          "#6f7976",
+          "#bfc9c5",
+          "#dde4e1",
+          "#f4fbf8"
+        ]
+      },
+      "inverse-on-surface": {
+        "role": "neutral",
+        "displayName": "Inverse On Surface",
+        "dark": "#2b3230",
+        "tonalRamp": [
+          "#09100e",
+          "#161d1b",
+          "#2b3230",
+          "#3f4946",
+          "#6f7976",
+          "#bfc9c5",
+          "#dde4e1",
+          "#f4fbf8"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display-l": {
+        "displayName": "Display L",
+        "purpose": "Section titles and the hero name; weight-in entrance."
+      },
+      "display-m": {
+        "displayName": "Display M",
+        "purpose": "The About statement."
+      },
+      "display-s": {
+        "displayName": "Display S",
+        "purpose": "Role and study titles; timeline years at wght 820 / wdth 90."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Sub-heads, contact link labels, hero role line."
+      },
+      "title-l": {
+        "displayName": "Title L",
+        "purpose": "Lead paragraphs."
+      },
+      "title-m": {
+        "displayName": "Title M",
+        "purpose": "Organisation lines and the filled button."
+      },
+      "body-l": {
+        "displayName": "Body L",
+        "purpose": "Running text; summaries capped at 68ch."
+      },
+      "body-m": {
+        "displayName": "Body M",
+        "purpose": "Secondary text, handles, hints."
+      },
+      "label-l": {
+        "displayName": "Label L",
+        "purpose": "Toolbar items, periods, sub-heads; sentence case."
+      },
+      "label-m": {
+        "displayName": "Label M",
+        "purpose": "Tags and tempo readout."
+      }
+    },
+    "shadows": [
+      {
+        "name": "elevation-1",
+        "value": "0 1px 2px rgb(var(--shadow) / 0.12), 0 1px 3px 1px rgb(var(--shadow) / 0.08)",
+        "purpose": "Filled call-to-action at rest. --shadow is 0 30 25 (light), 0 0 0 (dark)."
+      },
+      {
+        "name": "elevation-2",
+        "value": "0 1px 2px rgb(var(--shadow) / 0.14), 0 4px 12px 2px rgb(var(--shadow) / 0.1)",
+        "purpose": "Filled call-to-action on hover."
+      },
+      {
+        "name": "elevation-3",
+        "value": "0 4px 8px rgb(var(--shadow) / 0.12), 0 12px 32px 4px rgb(var(--shadow) / 0.12)",
+        "purpose": "Floating toolbar."
+      }
+    ],
+    "motion": [
+      {
+        "name": "spring-fast-spatial",
+        "value": "linear() spring, damping 0.6, stiffness 800, ~442ms (--spring-fast-spatial / -dur)",
+        "purpose": "Corner-radius morphs on buttons, chips, link rows, segmented items; arrow nudges."
+      },
+      {
+        "name": "spring-default-spatial",
+        "value": "linear() spring, damping 0.8, stiffness 380, ~517ms",
+        "purpose": "Toolbar indicator slide/resize, mark rotations, icon-well squaring, shape morph advance."
+      },
+      {
+        "name": "spring-slow-spatial",
+        "value": "linear() spring, damping 0.8, stiffness 200, ~679ms",
+        "purpose": "Card radius relax, hero shape bloom, morph rotation."
+      },
+      {
+        "name": "spring-fast-effects",
+        "value": "linear() spring, damping 1, stiffness 3800, ~229ms",
+        "purpose": "Non-overshooting effect spring (available)."
+      },
+      {
+        "name": "spring-default-effects",
+        "value": "linear() spring, damping 1, stiffness 1600, ~313ms",
+        "purpose": "Reduced-motion substitute for spatial springs in the morph script."
+      },
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Weight-in type transitions, entrance translates, fills; fallback when springs are absent."
+      },
+      {
+        "name": "beat",
+        "value": "536ms",
+        "purpose": "112 bpm tempo: hero shape autoplay pulse and hero entrance staggers (536 / 670 / 804 / 1072ms)."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "toolbar-compact",
+        "value": "1100px"
+      },
+      {
+        "name": "music-stack",
+        "value": "960px"
+      },
+      {
+        "name": "stack",
+        "value": "860px"
+      },
+      {
+        "name": "phone",
+        "value": "720px"
+      },
+      {
+        "name": "narrow",
+        "value": "480px"
+      },
+      {
+        "name": "tiny",
+        "value": "380px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Filled Button",
+      "kind": "button",
+      "refersTo": "button-filled",
+      "description": "Primary pill call to action; corners square off on a spring.",
+      "html": "<a class=\"ds-btn-filled\" href=\"#\">Read the story <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"M11 4h2v12l5.5-5.5 1.42 1.42L12 19.84l-7.92-7.92L5.5 10.5 11 16z\"/></svg></a>",
+      "css": ".ds-btn-filled{display:flex;width:fit-content;align-items:center;gap:var(--space-2,0.5rem);min-height:56px;padding-inline:2rem 1.5rem;border-radius:999px;background:var(--primary,#006b5c);color:var(--on-primary,#fff);font-family:var(--font-sans);font-size:1.125rem;font-variation-settings:'wght' 600;text-decoration:none;box-shadow:var(--elevation-1);transition:border-radius var(--spring-fast-spatial-dur,300ms) var(--spring-fast-spatial,ease),box-shadow 200ms linear}.ds-btn-filled:hover{border-radius:16px;box-shadow:var(--elevation-2)}.ds-btn-filled:active{border-radius:12px}.ds-btn-filled:focus-visible{outline:3px solid var(--primary,#006b5c);outline-offset:3px}"
+    },
+    {
+      "name": "Floating Toolbar",
+      "kind": "nav",
+      "refersTo": "toolbar",
+      "description": "Fixed pill nav with sliding secondary indicator and connected language segments.",
+      "html": "<nav class=\"ds-toolbar\"><a class=\"ds-tb-item is-active\" href=\"#\" aria-current=\"true\">About</a><a class=\"ds-tb-item\" href=\"#\">Work</a><a class=\"ds-tb-item\" href=\"#\">Music</a><span class=\"ds-tb-lang\"><a href=\"#\" aria-current=\"true\">EN</a><a href=\"#\">IT</a></span></nav>",
+      "css": ".ds-toolbar{display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem;border-radius:999px;background:var(--surface-container-high,#e2e9e6);color:var(--on-surface-variant,#3f4946);box-shadow:var(--elevation-3);font-family:var(--font-sans)}.ds-tb-item{display:flex;align-items:center;min-height:44px;padding-inline:1rem;border-radius:999px;font-size:0.875rem;font-variation-settings:'wght' 560;letter-spacing:0.01em;text-decoration:none;color:inherit;transition:background-color 200ms linear,color 200ms linear}.ds-tb-item:hover{background:color-mix(in oklab,var(--on-surface,#161d1b) 8%,transparent)}.ds-tb-item.is-active{background:var(--secondary-container,#cce8e0);color:var(--on-secondary-container,#06201b)}.ds-tb-lang{display:flex;gap:2px}.ds-tb-lang a{display:grid;place-items:center;min-width:44px;min-height:44px;padding-inline:0.75rem;font-size:0.875rem;font-variation-settings:'wght' 640;text-decoration:none;color:inherit;background:var(--surface-container-highest,#dde4e1);border-radius:8px;transition:border-radius var(--spring-fast-spatial-dur,300ms) var(--spring-fast-spatial,ease)}.ds-tb-lang a:first-child{border-start-start-radius:999px;border-end-start-radius:999px}.ds-tb-lang a:last-child{border-start-end-radius:999px;border-end-end-radius:999px}.ds-tb-lang a[aria-current]{background:var(--primary,#006b5c);color:var(--on-primary,#fff);border-radius:999px}.ds-tb-lang a:not([aria-current]):hover{border-radius:12px}"
+    },
+    {
+      "name": "Skill Chip",
+      "kind": "chip",
+      "refersTo": "chip-skill",
+      "description": "Tonal chip that turns primary and goes pill on hover.",
+      "html": "<span class=\"ds-chip\">Kotlin</span> <span class=\"ds-chip\">Jetpack Compose</span>",
+      "css": ".ds-chip{display:inline-block;padding:0.75rem 1.5rem;border-radius:12px;background:var(--surface-container-highest,#dde4e1);color:var(--on-surface,#161d1b);font-family:var(--font-sans);font-size:1.0625rem;font-variation-settings:'wght' 520;transition:border-radius var(--spring-fast-spatial-dur,300ms) var(--spring-fast-spatial,ease),background-color 200ms linear,color 200ms linear}.ds-chip:hover{border-radius:999px;background:var(--primary,#006b5c);color:var(--on-primary,#fff)}"
+    },
+    {
+      "name": "Tag",
+      "kind": "chip",
+      "refersTo": "chip-tag",
+      "description": "Static secondary tag inside role cards.",
+      "html": "<span class=\"ds-tag\">Android Automotive</span>",
+      "css": ".ds-tag{display:inline-block;padding:6px 0.75rem;border-radius:8px;background:var(--secondary-container,#cce8e0);color:var(--on-secondary-container,#06201b);font-family:var(--font-sans);font-size:0.8125rem;font-variation-settings:'wght' 600}"
+    },
+    {
+      "name": "Role Card",
+      "kind": "card",
+      "refersTo": "card-role",
+      "description": "Borderless tonal card; radius relaxes on hover.",
+      "html": "<article class=\"ds-card\"><h3>Android Technical Leader</h3><p class=\"ds-card-org\">Iriscube Reply · Turin</p><p class=\"ds-card-sum\">Led development across the whole feature lifecycle.</p></article>",
+      "css": ".ds-card{max-width:52rem;padding:2rem;border-radius:28px;background:var(--surface-container-low,#eef5f2);color:var(--on-surface,#161d1b);font-family:var(--font-sans);transition:border-radius var(--spring-slow-spatial-dur,900ms) var(--spring-slow-spatial,ease)}.ds-card:hover{border-radius:48px}.ds-card h3{margin:0;font-size:clamp(2rem,1.5rem + 2.4vw,3rem);line-height:1.05;letter-spacing:-0.025em;font-variation-settings:'wght' 720}.ds-card-org{margin:0.5rem 0 0;font-size:1.125rem;font-variation-settings:'wght' 520;color:var(--primary,#006b5c)}.ds-card-sum{margin:1.5rem 0 0;max-width:68ch;line-height:1.6;color:var(--on-surface-variant,#3f4946)}"
+    },
+    {
+      "name": "Link Row",
+      "kind": "custom",
+      "refersTo": "link-row",
+      "description": "Full-width pill link on the primary contact field.",
+      "html": "<div class=\"ds-field\"><a class=\"ds-link\" href=\"#\"><span class=\"ds-link-well\"><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"M4 20q-.8 0-1.4-.6T2 18V6q0-.8.6-1.4T4 4h16q.8 0 1.4.6T22 6v12q0 .8-.6 1.4T20 20zm8-7 8-5V6l-8 5-8-5v2z\"/></svg></span><span class=\"ds-link-text\"><b>Write an email</b><small>inbox</small></span><svg class=\"ds-link-arrow\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"M6.4 18 5 16.6 14.6 7H6V5h12v12h-2V8.4z\"/></svg></a></div>",
+      "css": ".ds-field{padding:1.5rem;border-radius:48px;background:var(--primary,#006b5c)}.ds-link{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1.5rem;min-height:88px;padding:1rem 2rem 1rem 1rem;border-radius:999px;background:var(--on-primary,#fff);color:var(--primary,#006b5c);font-family:var(--font-sans);text-decoration:none;transition:border-radius var(--spring-fast-spatial-dur,300ms) var(--spring-fast-spatial,ease),background-color 200ms linear}.ds-link:hover{border-radius:28px;background:var(--primary-container,#9ef2dc);color:var(--on-primary-container,#00201a)}.ds-link:focus-visible{outline:3px solid var(--on-primary,#fff);outline-offset:3px}.ds-link-well{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--primary,#006b5c);color:var(--on-primary,#fff);transition:border-radius var(--spring-default-spatial-dur,500ms) var(--spring-default-spatial,ease)}.ds-link:hover .ds-link-well{border-radius:16px}.ds-link-text{display:grid}.ds-link-text b{font-size:clamp(1.5rem,1.2rem + 1.2vw,2rem);line-height:1.15;font-variation-settings:'wght' 720}.ds-link-text small{font-size:0.9375rem}.ds-link-arrow{transition:translate var(--spring-fast-spatial-dur,300ms) var(--spring-fast-spatial,ease)}.ds-link:hover .ds-link-arrow{translate:4px -4px}"
+    },
+    {
+      "name": "Split Lockup",
+      "kind": "custom",
+      "refersTo": "display-l",
+      "description": "Heavy plus thin name lockup on the variable axes.",
+      "html": "<h1 class=\"ds-lockup\"><span class=\"ds-lockup-a\">Fabrizio</span><span class=\"ds-lockup-b\">Traversa</span></h1>",
+      "css": ".ds-lockup{display:grid;margin:0;font-family:var(--font-sans);font-size:clamp(3.25rem,2rem + 6.2vw,6rem);line-height:0.92;letter-spacing:-0.035em;color:var(--on-primary-container,#00201a)}.ds-lockup-a{font-variation-settings:'wght' 900,'wdth' 100}.ds-lockup-b{margin-top:-0.08em;padding-inline-start:0.06em;font-variation-settings:'wght' 120,'wdth' 120;letter-spacing:-0.02em;color:var(--primary,#006b5c)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Expressive Instrument",
+    "overview": "The site speaks the Android design language its owner ships: Material 3 Expressive, built by hand in plain CSS. One teal-seeded tonal palette yields the light and the dark scheme from the same tones; one variable typeface (Roboto Flex) carries every role by moving its weight and width axes; one shape library of polar-sampled forms (circle, cookie, clover, sunny, squircle, flower, burst, gem) morphs between silhouettes on springs. Rhythm is literal: a 112 bpm beat (536ms) drives the hero shape and paces the hero entrance staggers.\n\nDensity is generous and editorial. Sections are either open runs on the tinted surface or whole rounded colour fields inset from the viewport edge (12px, 8px on phones), so the page reads as a stack of tonal slabs rather than a grid of boxed cards. Depth comes from tone, not lines: there are no hairline borders anywhere in the build. Interaction is shape change: pills relax into rounded rectangles, circles soften into squircles, rails fill, all on physically derived springs.\n\nThe visual rejection is the dev-portfolio default: dark ground with a neon accent, terminal costume, and an equal grid of identical cards.",
+    "keyCharacteristics": [
+      "Tonal teal primary, peach tertiary reserved for the music side, teal-tinted neutral surfaces.",
+      "One variable face, hierarchy by axis: heavy display against thin, wide counterweights.",
+      "Shapes morph; corners respond to hover and press on spatial springs.",
+      "Whole-section colour fields with 48px corners, inset from the page.",
+      "Light and dark from the same tonal palette, following `prefers-color-scheme`."
+    ],
+    "rules": [
+      {
+        "name": "The Colour Field Rule",
+        "body": "Whole-section fields use the role colour itself in the dark scheme (contact = primary, music = tertiary: bright fields on a dark page); cards inside sections use the dark containers; quiet tonal steps that only group text (Interests panel, footer legal line) are `color-mix` tints of their own field in both schemes.",
+        "section": "colors"
+      },
+      {
+        "name": "The Peach Belongs to Music Rule",
+        "body": "Tertiary appears only on the music side of the story (music section, Conservatory card, Music mark, play-along pads). Engineering content stays teal.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tone Not Line Rule",
+        "body": "Grouping and separation are done with surface tones and `color-mix` tints of the field, never with borders or dividers.",
+        "section": "colors"
+      },
+      {
+        "name": "The Split Lockup Rule",
+        "body": "A name or a range is set as heavy plus thin: \"Fabrizio\" at wght 900 / wdth 100, \"Traversa\" at wght 120 / wdth 120 in primary; years \"2019\" at 820 over \"2024\" at 160 in primary. Use it for identity and time spans, not for ordinary headings.",
+        "section": "typography"
+      },
+      {
+        "name": "The Weight-In Rule",
+        "body": "Section titles enter by gaining weight on the variable axis (from wght 200 / wdth 110 to their final weight), and the hero lockup trades weight between its two words. The resting state is the final state, so no-JS and reduced-motion readers see finished type.",
+        "section": "typography"
+      },
+      {
+        "name": "The Only What Floats Rule",
+        "body": "Cards, fields and chips are flat. Elevation belongs to the floating toolbar and the filled call to action; a new card does not get a shadow.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Shape Answers Rule",
+        "body": "Feedback is a change of form on a spring, not a colour flash alone. Every interactive container either morphs its corner radius or rotates its shape on hover and press.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "**Do** take every colour from the tonal roles in `tokens.css` and derive in-field steps with `color-mix(in oklab, ink N%, field)`.",
+      "**Do** set hierarchy with Roboto Flex axes; reserve the heavy plus thin split for names and date ranges.",
+      "**Do** make interactive containers answer with form: radius morphs and rotations on the `--spring-*` easings and their `-dur` durations.",
+      "**Do** inset whole-section colour fields 12px (8px on phones) with 48px corners (32px on phones).",
+      "**Do** build both schemes from the same tones and follow the Colour Field Rule in dark.",
+      "**Do** keep every animation's resting state readable without JS, and honour `prefers-reduced-motion`.",
+      "**Do** keep touch targets at 44px minimum."
+    ],
+    "donts": [
+      "**Don't** use hairline borders or dividers to group content; use tone.",
+      "**Don't** put shadows on cards, fields or chips; only the floating toolbar and the filled call to action lift.",
+      "**Don't** use the peach tertiary outside the music side of the story.",
+      "**Don't** add a second typeface or set labels in uppercase.",
+      "**Don't** fall back to the dev-portfolio default: dark ground with neon accent, terminal costume, an equal grid of identical cards.",
+      "**Don't** use linear or generic ease curves for spatial motion; colour and opacity may stay linear."
+    ]
+  }
+}

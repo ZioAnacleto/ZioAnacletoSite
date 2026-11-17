@@ -1,0 +1,355 @@
+---
+import Icon from './Icon.astro';
+import MorphShape from './MorphShape.astro';
+import Monogram from './Monogram.astro';
+import { person } from '@/data/profile';
+import type { Locale } from '@/i18n/config';
+import { useTranslations } from '@/i18n/ui';
+
+interface Props {
+  locale: Locale;
+  /** Optional portrait under /public, e.g. "/images/portrait.jpg". */
+  portrait?: string;
+}
+
+const { locale, portrait } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section class="hero" id="top" data-hero>
+  <div class="hero-inner container">
+    <div class="copy">
+      <h1 class="name">
+        <span class="first">{person.firstName}</span>
+        <span class="last">{person.lastName}</span>
+      </h1>
+      <p class="role">
+        <strong>{t('hero.role')}</strong>
+        <span>{t('hero.also')}</span>
+      </p>
+      <p class="place">
+        <Icon name="ms:location-on-outline-rounded" size={20} />
+        {t('hero.location')}
+      </p>
+      <a class="scroll" href="#about">
+        {t('hero.scroll')}
+        <Icon name="ms:arrow-downward-rounded" size={20} />
+      </a>
+    </div>
+
+    <div class="stage">
+      <div class="shape">
+        <MorphShape
+          shapes={['cookie', 'clover', 'sunny', 'squircle', 'flower', 'burst', 'gem', 'circle']}
+          label={t('hero.shape.label')}
+          autoplay
+          toggleId="beat-toggle"
+          image={portrait ? { src: portrait, alt: t('hero.portrait.alt') } : undefined}
+        >
+          <Monogram scale={0.82} />
+        </MorphShape>
+      </div>
+
+      <div class="tempo">
+        <button
+          type="button"
+          id="beat-toggle"
+          class="beat-toggle"
+          aria-label={t('hero.pause')}
+          aria-pressed="false"
+          data-state="playing"
+        >
+          <Icon name="ms:pause-rounded" size={20} class="i-pause" />
+          <Icon name="ms:play-arrow-rounded" size={20} class="i-play" />
+        </button>
+        <span class="dots" aria-hidden="true">
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+        </span>
+        <span class="bpm">112 bpm</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    margin: var(--space-3);
+    border-radius: var(--corner-2xl);
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+    overflow: clip;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-6);
+    min-height: min(100svh - var(--space-6), 60rem);
+    padding-block: calc(var(--space-9) + var(--space-4)) var(--space-8);
+  }
+
+  .name {
+    display: grid;
+    font-size: var(--display-l);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+  }
+
+  .first {
+    font-variation-settings:
+      'wght' 900,
+      'wdth' 100;
+    position: relative;
+    z-index: 1;
+  }
+
+  .last {
+    margin-block-start: -0.08em;
+    padding-inline-start: 0.06em;
+    font-variation-settings:
+      'wght' 120,
+      'wdth' 120;
+    letter-spacing: -0.02em;
+    color: var(--primary);
+  }
+
+  .role {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 0.4ch;
+    margin-block-start: var(--space-6);
+    font-size: var(--headline);
+    line-height: 1.25;
+    font-variation-settings: 'wght' 360;
+  }
+
+  .role strong {
+    font-variation-settings: 'wght' 700;
+  }
+
+  .place {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-block-start: var(--space-4);
+    padding: var(--space-2) var(--space-4) var(--space-2) var(--space-3);
+    border-radius: var(--corner-s);
+    background: color-mix(in oklab, var(--primary) 14%, var(--primary-container));
+    font-size: var(--label-l);
+    font-variation-settings: 'wght' 560;
+  }
+
+  .scroll {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    gap: var(--space-2);
+    margin-block-start: var(--space-7);
+    min-height: 56px;
+    padding-inline: var(--space-6) var(--space-5);
+    border-radius: 28px; /* half of min-height */
+    background: var(--primary);
+    color: var(--on-primary);
+    font-size: var(--title-m);
+    font-variation-settings: 'wght' 600;
+    text-decoration: none;
+    box-shadow: var(--elevation-1);
+    transition:
+      border-radius var(--spring-fast-spatial-dur, 300ms) var(--spring-fast-spatial, ease),
+      box-shadow 200ms linear;
+  }
+
+  .scroll:hover {
+    border-radius: var(--corner-l);
+    box-shadow: var(--elevation-2);
+  }
+
+  .scroll:active {
+    border-radius: var(--corner-m);
+  }
+
+  .stage {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-4);
+  }
+
+  .shape {
+    width: min(100%, 34rem);
+  }
+
+  .tempo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-1) var(--space-4) var(--space-1) var(--space-1);
+    border-radius: var(--corner-full);
+    background: color-mix(in oklab, var(--primary) 12%, var(--primary-container));
+    font-size: var(--label-m);
+    font-variation-settings: 'wght' 560;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .beat-toggle {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 20px;
+    background: var(--primary);
+    color: var(--on-primary);
+    cursor: pointer;
+    transition: border-radius var(--spring-fast-spatial-dur, 300ms) var(--spring-fast-spatial, ease);
+  }
+
+  .beat-toggle:hover {
+    border-radius: var(--corner-m);
+  }
+
+  .beat-toggle :global(.i-play),
+  .beat-toggle[data-state='paused'] :global(.i-pause) {
+    display: none;
+  }
+
+  .beat-toggle[data-state='paused'] :global(.i-play) {
+    display: block;
+  }
+
+  .dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .dots i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: color-mix(in oklab, var(--on-primary-container) 25%, transparent);
+    transition:
+      background-color 120ms linear,
+      scale 300ms var(--ease-out);
+  }
+
+  .stage:has([data-beat='0']) .dots i:nth-child(1),
+  .stage:has([data-beat='1']) .dots i:nth-child(2),
+  .stage:has([data-beat='2']) .dots i:nth-child(3),
+  .stage:has([data-beat='3']) .dots i:nth-child(4) {
+    background: var(--primary);
+    scale: 1.35;
+  }
+
+  .stage:has([data-state='paused']) .dots i {
+    background: color-mix(in oklab, var(--on-primary-container) 25%, transparent);
+    scale: 1;
+  }
+
+  /* ---------- focal entrance: the lockup trades weight, the shape blooms ---------- */
+  :global(.js) .hero:not(.is-in) .first {
+    font-variation-settings:
+      'wght' 100,
+      'wdth' 125;
+  }
+
+  :global(.js) .hero:not(.is-in) .last {
+    font-variation-settings:
+      'wght' 900,
+      'wdth' 100;
+  }
+
+  :global(.js) .hero:not(.is-in) .shape {
+    scale: 0.35;
+    rotate: -60deg;
+    opacity: 0;
+  }
+
+  :global(.js) .hero:not(.is-in) :is(.role, .place, .scroll, .tempo) {
+    opacity: 0;
+    translate: 0 1rem;
+  }
+
+  .first,
+  .last {
+    transition: font-variation-settings 1.4s var(--ease-out);
+  }
+
+  .last {
+    transition-delay: 80ms;
+  }
+
+  .shape {
+    transition:
+      scale var(--spring-slow-spatial-dur, 900ms) var(--spring-slow-spatial, ease),
+      rotate var(--spring-slow-spatial-dur, 900ms) var(--spring-slow-spatial, ease),
+      opacity 400ms linear;
+    transition-delay: 160ms;
+  }
+
+  /* Entrance delays apply to opacity/translate only, so hover feedback stays instant. */
+  .role,
+  .place,
+  .scroll,
+  .tempo {
+    transition:
+      opacity 500ms linear var(--enter-delay, 0ms),
+      translate 700ms var(--ease-out) var(--enter-delay, 0ms);
+  }
+
+  .scroll {
+    transition:
+      opacity 500ms linear var(--enter-delay),
+      translate 700ms var(--ease-out) var(--enter-delay),
+      border-radius var(--spring-fast-spatial-dur, 300ms) var(--spring-fast-spatial, ease),
+      box-shadow 200ms linear;
+  }
+
+  .role {
+    --enter-delay: 536ms;
+  }
+  .place {
+    --enter-delay: 670ms;
+  }
+  .scroll {
+    --enter-delay: 804ms;
+  }
+  .tempo {
+    --enter-delay: 1072ms;
+  }
+
+  @media (max-width: 860px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+      padding-block: var(--space-7) var(--space-7);
+      min-height: auto;
+      gap: var(--space-5);
+    }
+
+    .stage {
+      order: -1;
+      justify-items: start;
+    }
+
+    .shape {
+      width: min(62vw, 18rem);
+    }
+
+    .role {
+      margin-block-start: var(--space-5);
+    }
+
+    .scroll {
+      margin-block-start: var(--space-6);
+    }
+  }
+
+  @media (max-width: 720px) {
+    .hero {
+      margin: var(--space-2);
+      border-radius: var(--corner-xl-plus);
+    }
+  }
+</style>

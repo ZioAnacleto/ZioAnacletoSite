@@ -1,0 +1,32 @@
+---
+/**
+ * The FT monogram: F and T share one top bar, and the T's stem is a percussion
+ * mallet (the head carries the music colour). Renders an SVG <g> in a 0–100 box,
+ * so it can sit inside any 100×100 viewBox (hero shape, toolbar mark, favicon).
+ *
+ * Colours: stroke = currentColor, mallet head = --mallet.
+ */
+interface Props {
+  /** Optical scale around the centre; small renderings need a larger mark. */
+  scale?: number;
+}
+
+const { scale = 1 } = Astro.props;
+const transform = scale === 1 ? undefined : `translate(50 50) scale(${scale}) translate(-50 -50)`;
+---
+
+<g class="monogram" transform={transform}>
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M30 70V31.5H71" stroke-width="8.5"></path>
+    <path d="M30 50.5H45.5" stroke-width="8.5"></path>
+    <path d="M58.5 31.5V58" stroke-width="4.5"></path>
+  </g>
+  <circle class="mallet" cx="58.5" cy="64.5" r="7" fill="var(--mallet)" data-mallet></circle>
+</g>
+
+<style>
+  .mallet {
+    transform-box: fill-box;
+    transform-origin: 50% 0%;
+  }
+</style>

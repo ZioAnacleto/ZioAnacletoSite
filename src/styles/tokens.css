@@ -1,0 +1,106 @@
+/*
+ * Design tokens. Tonal palette seeded from the resume teal (hue ~170),
+ * Material 3 roles, light and dark from the same tones.
+ * Spring easings (--spring-*) are injected at build time from src/lib/motion.ts.
+ */
+
+:root {
+  /* Follows the system until the visitor picks a theme (html[data-theme], see ThemeToggle). */
+  color-scheme: light dark;
+
+  /* ---------- colour: light-dark(light, dark), resolved by color-scheme ---------- */
+  --primary: light-dark(#006b5c, #82d5c1);
+  --on-primary: light-dark(#ffffff, #00382f);
+  --primary-container: light-dark(#9ef2dc, #005045);
+  --on-primary-container: light-dark(#00201a, #9ef2dc);
+  --primary-fixed-dim: #82d5c1; /* fixed tone, same in both schemes */
+
+  --secondary: light-dark(#4a635d, #b1ccc4);
+  --on-secondary: light-dark(#ffffff, #1c352f);
+  --secondary-container: light-dark(#cce8e0, #334b45);
+  --on-secondary-container: light-dark(#06201b, #cce8e0);
+
+  --tertiary: light-dark(#8b5000, #ffb871);
+  --on-tertiary: light-dark(#ffffff, #4a2800);
+  --tertiary-container: light-dark(#ffdcbe, #6a3c00);
+  --on-tertiary-container: light-dark(#2d1600, #ffdcbe);
+  --tertiary-fixed-dim: #ffb871; /* fixed tone, same in both schemes */
+  /* Monogram mallet head: the music colour, contrasted against each scheme's primary */
+  --mallet: light-dark(#ffb871, #8b5000);
+
+  --surface: light-dark(#f4fbf8, #0e1513);
+  --surface-container-lowest: light-dark(#ffffff, #09100e);
+  --surface-container-low: light-dark(#eef5f2, #161d1b);
+  --surface-container: light-dark(#e8efec, #1a211f);
+  --surface-container-high: light-dark(#e2e9e6, #252b29);
+  --surface-container-highest: light-dark(#dde4e1, #2f3634);
+  --on-surface: light-dark(#161d1b, #dde4e1);
+  --on-surface-variant: light-dark(#3f4946, #bfc9c5);
+  --outline: light-dark(#6f7976, #899390);
+  --outline-variant: light-dark(#bfc9c5, #3f4946);
+  --inverse-surface: light-dark(#2b3230, #dde4e1);
+  --inverse-on-surface: light-dark(#ecf2ef, #2b3230);
+  --shadow-color: light-dark(rgb(0 30 25), rgb(0 0 0));
+
+  /* ---------- type ---------- */
+  --font-sans: 'Roboto Flex Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --display-l: clamp(3.25rem, 2rem + 6.2vw, 6rem);
+  --display-m: clamp(2.5rem, 1.6rem + 4vw, 4.25rem);
+  --display-s: clamp(2rem, 1.5rem + 2.4vw, 3rem);
+  --headline: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --title-l: 1.375rem;
+  --title-m: 1.125rem;
+  --body-l: 1.0625rem;
+  --body-m: 0.9375rem;
+  --label-l: 0.875rem;
+  --label-m: 0.8125rem;
+
+  /* ---------- shape (M3 Expressive corner scale) ---------- */
+  --corner-xs: 4px;
+  --corner-s: 8px;
+  --corner-m: 12px;
+  --corner-l: 16px;
+  --corner-xl: 28px;
+  --corner-xl-plus: 32px;
+  --corner-2xl: 48px;
+  --corner-full: 999px;
+
+  /* ---------- space (4px grid) ---------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 9rem;
+  --gutter: clamp(1rem, 0.4rem + 2.6vw, 2.5rem);
+  --content-max: 76rem;
+
+  /* ---------- elevation ---------- */
+  --elevation-1:
+    0 1px 2px color-mix(in srgb, var(--shadow-color) 12%, transparent),
+    0 1px 3px 1px color-mix(in srgb, var(--shadow-color) 8%, transparent);
+  --elevation-2:
+    0 1px 2px color-mix(in srgb, var(--shadow-color) 14%, transparent),
+    0 4px 12px 2px color-mix(in srgb, var(--shadow-color) 10%, transparent);
+  --elevation-3:
+    0 4px 8px color-mix(in srgb, var(--shadow-color) 12%, transparent),
+    0 12px 32px 4px color-mix(in srgb, var(--shadow-color) 12%, transparent);
+
+  /* ---------- motion (fallbacks; replaced by springs) ---------- */
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --beat: 536ms; /* 112 bpm */
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}

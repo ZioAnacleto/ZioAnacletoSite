@@ -1,0 +1,31 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# environment
+.env
+.env.*
+!.env.example
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Cloudflare
+.wrangler/
+
+# Impeccable runtime (committed design context lives in .impeccable/*.json and surfaces/)
+.impeccable/config.local.json
+
+# Local Claude Code config
+.claude/

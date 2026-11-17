@@ -1,0 +1,154 @@
+---
+import Icon from './Icon.astro';
+import { person } from '@/data/profile';
+import type { Locale } from '@/i18n/config';
+import { useTranslations } from '@/i18n/ui';
+import { shapePath } from '@/lib/shapes';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const sides = [
+  {
+    id: 'code',
+    title: t('about.code'),
+    body: t('about.code.body'),
+    icon: 'ms:code-rounded',
+    shape: shapePath('squircle', 56),
+  },
+  {
+    id: 'music',
+    title: t('about.music'),
+    body: t('about.music.body'),
+    icon: 'ms:music-note-rounded',
+    shape: shapePath('flower', 56),
+  },
+] as const;
+---
+
+<section id="about" class="about container" data-section aria-labelledby="about-title">
+  <h2 id="about-title" class="title">
+    {t('about.title')}
+  </h2>
+  <p class="lead">{person.profile[locale]}</p>
+
+  <div class="sides">
+    {sides.map((side) => (
+      <div class:list={['side', `side-${side.id}`]}>
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 56 56">
+            <path d={side.shape} />
+          </svg>
+          <Icon name={side.icon} size={26} />
+        </span>
+        <h3>{side.title}</h3>
+        <p>{side.body}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .about {
+    padding-block: var(--space-10) var(--space-9);
+  }
+
+  .title {
+    max-width: 18ch;
+    font-size: var(--display-m);
+    letter-spacing: -0.03em;
+    --wght-final: 780;
+    font-variation-settings: 'wght' 780;
+  }
+
+  .lead {
+    max-width: 62ch;
+    margin-block-start: var(--space-6);
+    font-size: var(--title-l);
+    line-height: 1.55;
+    font-variation-settings: 'wght' 380;
+    color: var(--on-surface-variant);
+  }
+
+  .sides {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-7);
+    margin-block-start: var(--space-8);
+    max-width: 62rem;
+  }
+
+  .side {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: var(--space-5);
+    row-gap: var(--space-2);
+    align-items: start;
+  }
+
+  .mark {
+    grid-row: span 2;
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    transition: rotate var(--spring-default-spatial-dur, 500ms) var(--spring-default-spatial, ease);
+  }
+
+  .side:hover .mark {
+    rotate: 30deg;
+  }
+
+  .mark svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .mark :global(.icon) {
+    position: relative;
+  }
+
+  .side-code .mark {
+    color: var(--on-primary);
+  }
+  .side-code .mark path {
+    fill: var(--primary);
+  }
+
+  .side-music .mark {
+    color: var(--on-tertiary);
+  }
+  .side-music .mark path {
+    fill: var(--tertiary);
+  }
+
+  .side h3 {
+    font-size: var(--headline);
+    font-variation-settings: 'wght' 700;
+    letter-spacing: -0.01em;
+    padding-block-start: 0.2em;
+  }
+
+  .side p {
+    max-width: 44ch;
+    color: var(--on-surface-variant);
+  }
+
+  @media (max-width: 720px) {
+    .about {
+      padding-block: var(--space-8) var(--space-7);
+    }
+
+    .sides {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+  }
+</style>

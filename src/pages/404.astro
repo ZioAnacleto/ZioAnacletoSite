@@ -1,0 +1,84 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import MorphShape from '@/components/MorphShape.astro';
+import { homePath, locales } from '@/i18n/config';
+import { useTranslations } from '@/i18n/ui';
+
+const en = useTranslations('en');
+const it = useTranslations('it');
+---
+
+<BaseLayout locale="en" title="404 · Fabrizio Traversa" alternates={false} noindex>
+  <section class="nf container">
+    <div class="shape">
+      <MorphShape
+        shapes={['clover', 'cookie', 'sunny', 'squircle']}
+        label={en('hero.shape.label')}
+        autoplay
+      />
+    </div>
+    <h1>{en('notfound.title')}</h1>
+    <p>{en('notfound.body')}</p>
+    <p lang="it" class="it">
+      {it('notfound.title')}. {it('notfound.body')}
+    </p>
+    <div class="actions">
+      {locales.map((code) => (
+        <a href={homePath(code)} lang={code}>
+          {useTranslations(code)('notfound.back')}
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import { initMorphShapes } from '@/scripts/morph-shape';
+  initMorphShapes();
+</script>
+
+<style>
+  .nf {
+    display: grid;
+    justify-items: start;
+    align-content: center;
+    gap: var(--space-4);
+    min-height: 100svh;
+    padding-block: var(--space-8);
+  }
+
+  .shape {
+    width: 9rem;
+  }
+
+  h1 {
+    font-size: var(--display-m);
+    letter-spacing: -0.03em;
+    font-variation-settings: 'wght' 800;
+  }
+
+  .it {
+    color: var(--on-surface-variant);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-block-start: var(--space-4);
+  }
+
+  .actions a {
+    padding: var(--space-3) var(--space-5);
+    border-radius: var(--corner-full);
+    background: var(--primary);
+    color: var(--on-primary);
+    text-decoration: none;
+    font-variation-settings: 'wght' 600;
+  }
+
+  .actions a + a {
+    background: var(--secondary-container);
+    color: var(--on-secondary-container);
+  }
+</style>

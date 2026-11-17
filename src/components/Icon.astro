@@ -1,0 +1,35 @@
+---
+/**
+ * Inline SVG icon resolved at build time from Iconify JSON sets
+ * (Material Symbols Rounded for UI, MDI for brand marks). Zero runtime cost.
+ */
+import { getIconData, iconToSVG, iconToHTML, replaceIDs } from '@iconify/utils';
+import materialSymbols from '@iconify-json/material-symbols/icons.json';
+import mdi from '@iconify-json/mdi/icons.json';
+import type { IconifyJSON } from '@iconify/types';
+
+interface Props {
+  /** "ms:name" for Material Symbols, "mdi:name" for MDI */
+  name: `ms:${string}` | `mdi:${string}`;
+  size?: number | string;
+  label?: string;
+  class?: string;
+}
+
+const { name, size = 24, label, class: className } = Astro.props;
+const [prefix, iconName] = name.split(':') as [string, string];
+const set = (prefix === 'mdi' ? mdi : materialSymbols) as IconifyJSON;
+const data = getIconData(set, iconName);
+if (!data) throw new Error(`Icon not found: ${name}`);
+
+const { attributes, body } = iconToSVG(data, { height: size, width: size });
+const svg = iconToHTML(replaceIDs(body), {
+  ...attributes,
+  fill: 'currentColor',
+  class: ['icon', className].filter(Boolean).join(' '),
+  ...(label ? { role: 'img', 'aria-label': label } : { 'aria-hidden': 'true' }),
+  focusable: 'false',
+});
+---
+
+<Fragment set:html={svg} />

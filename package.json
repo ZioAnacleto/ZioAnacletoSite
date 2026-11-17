@@ -1,0 +1,32 @@
+{
+  "name": "zioanacleto-site",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personal portfolio of Fabrizio Traversa (EN/IT)",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "@fontsource-variable/roboto-flex": "^5.3.0",
+    "astro": "^7.4.12"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@iconify-json/material-symbols": "^1.2.99",
+    "@iconify-json/mdi": "^1.2.3",
+    "@iconify/utils": "^3.1.7",
+    "@types/node": "^26.6.6",
+    "prettier": "^3.10.1",
+    "prettier-plugin-astro": "^1.1.2",
+    "typescript": "^6.0.3"
+  }
+}

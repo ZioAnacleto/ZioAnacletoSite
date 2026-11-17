@@ -1,0 +1,210 @@
+---
+import Icon from './Icon.astro';
+import { education } from '@/data/profile';
+import type { Locale } from '@/i18n/config';
+import { useTranslations } from '@/i18n/ui';
+import { formatYearMonth } from '@/lib/format';
+import { shapePath } from '@/lib/shapes';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const marks = { code: shapePath('squircle', 64), music: shapePath('cookie', 64) };
+const icons = { code: 'ms:school-outline-rounded', music: 'ms:piano-rounded' } as const;
+---
+
+<section id="education" class="education container" data-section aria-labelledby="education-title">
+  <h2 id="education-title" class="title">
+    {t('education.title')}
+  </h2>
+
+  <div class="pair">
+    {education.map((item) => (
+      <article
+        class:list={['study', `study-${item.discipline}`]}
+        aria-labelledby={`edu-${item.id}`}
+      >
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64">
+            <path d={marks[item.discipline]} />
+          </svg>
+          <Icon name={icons[item.discipline]} size={28} />
+        </span>
+        <h3 id={`edu-${item.id}`}>{item.title[locale]}</h3>
+        <p class="school">
+          {item.school[locale]} · {item.city[locale]}
+        </p>
+        <p class="period">
+          {item.start && (
+            <>
+              <time datetime={item.start}>{formatYearMonth(item.start, locale)}</time>
+              {' – '}
+            </>
+          )}
+          <time datetime={item.end}>{formatYearMonth(item.end, locale)}</time>
+        </p>
+        <p class="desc">{item.description[locale]}</p>
+        <dl class="details">
+          {item.details.map((d) => (
+            <div>
+              <dt>{d.label[locale]}</dt>
+              <dd>{d.value[locale]}</dd>
+            </div>
+          ))}
+        </dl>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .education {
+    padding-block: var(--space-9);
+  }
+
+  .title {
+    font-size: var(--display-l);
+    letter-spacing: -0.035em;
+    --wght-final: 820;
+    font-variation-settings: 'wght' 820;
+  }
+
+  .pair {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: var(--space-3);
+    margin-block-start: var(--space-8);
+  }
+
+  .study {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-7) var(--space-6) var(--space-6);
+    background: var(--surface-container);
+    transition: border-radius var(--spring-slow-spatial-dur, 900ms) var(--spring-slow-spatial, ease);
+  }
+
+  /* Connected pair: the inner corners stay tight, the outer ones open up. */
+  .study-code {
+    border-radius: var(--corner-2xl) var(--corner-s) var(--corner-s) var(--corner-2xl);
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+  }
+
+  .study-music {
+    border-radius: var(--corner-s) var(--corner-2xl) var(--corner-2xl) var(--corner-s);
+    background: var(--tertiary-container);
+    color: var(--on-tertiary-container);
+  }
+
+  .study:hover {
+    border-radius: var(--corner-2xl);
+  }
+
+  .mark {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    margin-block-end: var(--space-6);
+    transition: rotate var(--spring-default-spatial-dur, 500ms) var(--spring-default-spatial, ease);
+  }
+
+  .study:hover .mark {
+    rotate: -25deg;
+  }
+
+  .mark svg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .mark :global(.icon) {
+    position: relative;
+  }
+
+  .study-code .mark {
+    color: var(--on-primary);
+  }
+  .study-code .mark path {
+    fill: var(--primary);
+  }
+  .study-music .mark {
+    color: var(--on-tertiary);
+  }
+  .study-music .mark path {
+    fill: var(--tertiary);
+  }
+
+  .period {
+    margin-block-start: var(--space-1);
+    font-size: var(--label-l);
+    font-variation-settings: 'wght' 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  h3 {
+    margin-block-start: var(--space-2);
+    font-size: var(--display-s);
+    letter-spacing: -0.025em;
+    font-variation-settings: 'wght' 720;
+  }
+
+  .school {
+    margin-block-start: var(--space-2);
+    font-size: var(--title-m);
+    font-variation-settings: 'wght' 520;
+  }
+
+  .desc {
+    max-width: 56ch;
+    margin-block-start: var(--space-5);
+  }
+
+  .details {
+    margin-block-start: auto;
+    padding-block-start: var(--space-6);
+  }
+
+  .details div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-3);
+  }
+
+  dt {
+    font-variation-settings: 'wght' 700;
+  }
+
+  @media (max-width: 860px) {
+    .pair {
+      grid-template-columns: 1fr;
+    }
+
+    .study-code {
+      border-radius: var(--corner-2xl) var(--corner-2xl) var(--corner-s) var(--corner-s);
+    }
+
+    .study-music {
+      border-radius: var(--corner-s) var(--corner-s) var(--corner-2xl) var(--corner-2xl);
+    }
+
+    .study {
+      padding: var(--space-6) var(--space-5) var(--space-5);
+    }
+  }
+  @media (max-width: 720px) {
+    .education {
+      padding-block: var(--space-6) var(--space-8);
+    }
+
+    .pair {
+      margin-block-start: var(--space-5);
+    }
+  }
+</style>

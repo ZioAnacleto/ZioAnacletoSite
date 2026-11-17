@@ -1,0 +1,86 @@
+---
+import '@fontsource-variable/roboto-flex/wdth.css';
+import '@/styles/global.css';
+import { homePath, localeMeta, locales, type Locale } from '@/i18n/config';
+import { useTranslations } from '@/i18n/ui';
+import { springCssVariables } from '@/lib/motion';
+
+interface Props {
+  locale: Locale;
+  title?: string;
+  description?: string;
+  /** Emit hreflang alternates (home page only). */
+  alternates?: boolean;
+  noindex?: boolean;
+}
+
+const { locale, title, description, alternates = true, noindex = false } = Astro.props;
+const t = useTranslations(locale);
+const pageTitle = title ?? t('meta.title');
+const pageDescription = description ?? t('meta.description');
+const site = Astro.site;
+const canonical = site ? new URL(Astro.url.pathname, site).href : undefined;
+const springVars = `:root{${springCssVariables()}}`;
+---
+
+<!doctype html>
+<html lang={localeMeta[locale].htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#9ef2dc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0e1513" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {noindex && <meta name="robots" content="noindex" />}
+    {canonical && <link rel="canonical" href={canonical} />}
+    {site &&
+      alternates &&
+      locales.map((code) => (
+        <link rel="alternate" hreflang={code} href={new URL(homePath(code), site).href} />
+      ))}
+    {site && alternates && (
+      <link rel="alternate" hreflang="x-default" href={new URL('/', site).href} />
+    )}
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:locale" content={localeMeta[locale].ogLocale} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta property="profile:first_name" content="Fabrizio" />
+    <meta property="profile:last_name" content="Traversa" />
+
+    <style set:html={springVars} is:inline></style>
+    <script is:inline>
+      // Runs before first paint: JS flag + saved or system theme (no flash of the wrong theme).
+      (function () {
+        var root = document.documentElement;
+        root.classList.add('js');
+        var saved = null;
+        try {
+          saved = localStorage.getItem('theme');
+        } catch (e) {}
+        var theme =
+          saved === 'light' || saved === 'dark'
+            ? saved
+            : matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+        root.dataset.theme = theme;
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      {t('skip')}
+    </a>
+    <slot name="header" />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <slot name="footer" />
+  </body>
+</html>

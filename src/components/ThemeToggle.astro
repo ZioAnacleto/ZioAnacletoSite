@@ -1,0 +1,82 @@
+---
+import Icon from './Icon.astro';
+import type { Locale } from '@/i18n/config';
+import { useTranslations } from '@/i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const t = useTranslations(Astro.props.locale);
+---
+
+<button
+  type="button"
+  class="theme-toggle"
+  data-theme-toggle
+  data-label-dark={t('theme.toDark')}
+  data-label-light={t('theme.toLight')}
+  aria-label={t('theme.toDark')}
+>
+  <Icon name="ms:dark-mode-outline-rounded" size={22} class="moon" />
+  <Icon name="ms:light-mode-outline-rounded" size={22} class="sun" />
+</button>
+
+<style>
+  .theme-toggle {
+    position: relative;
+    display: none; /* needs JS; without it the page simply follows the system */
+    place-items: center;
+    flex: none;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 22px;
+    background: var(--surface-container-highest);
+    color: var(--on-surface-variant);
+    cursor: pointer;
+    transition:
+      border-radius var(--spring-fast-spatial-dur, 300ms) var(--spring-fast-spatial, ease),
+      background-color 200ms linear;
+  }
+
+  :global(.js) .theme-toggle {
+    display: grid;
+  }
+
+  .theme-toggle:hover {
+    border-radius: var(--corner-m);
+    background: color-mix(in oklab, var(--on-surface) 12%, var(--surface-container-highest));
+  }
+
+  .theme-toggle :global(.icon) {
+    grid-area: 1 / 1;
+    transition:
+      rotate var(--spring-default-spatial-dur, 500ms) var(--spring-default-spatial, ease),
+      scale var(--spring-default-spatial-dur, 500ms) var(--spring-default-spatial, ease),
+      opacity 150ms linear;
+  }
+
+  /* Shows the theme you would switch to: the moon in light, the sun in dark. */
+  :global([data-theme='dark']) .theme-toggle :global(.moon),
+  :global([data-theme='light']) .theme-toggle :global(.sun) {
+    opacity: 0;
+    rotate: -90deg;
+    scale: 0.4;
+  }
+
+  @media (max-width: 720px) {
+    .theme-toggle {
+      width: 40px;
+      border-radius: 20px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .theme-toggle {
+      width: 36px;
+      border-radius: 18px;
+    }
+  }
+</style>

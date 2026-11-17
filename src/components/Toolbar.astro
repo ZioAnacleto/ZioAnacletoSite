@@ -1,0 +1,295 @@
+---
+import Icon from './Icon.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import Monogram from './Monogram.astro';
+import { homePath, locales, type Locale } from '@/i18n/config';
+import { useTranslations, type UiKey } from '@/i18n/ui';
+import { shapePath } from '@/lib/shapes';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const items: { id: string; key: UiKey; icon: `ms:${string}` }[] = [
+  { id: 'about', key: 'nav.about', icon: 'ms:person-outline-rounded' },
+  { id: 'experience', key: 'nav.experience', icon: 'ms:work-outline-rounded' },
+  { id: 'education', key: 'nav.education', icon: 'ms:school-outline-rounded' },
+  { id: 'skills', key: 'nav.skills', icon: 'ms:code-rounded' },
+  { id: 'music', key: 'nav.music', icon: 'ms:music-note-rounded' },
+  { id: 'contact', key: 'nav.contact', icon: 'ms:mail-outline-rounded' },
+];
+
+const mark = shapePath('cookie', 100, 0);
+---
+
+<header class="toolbar-wrap">
+  <nav class="toolbar" aria-label={t('nav.label')} data-toolbar>
+    <a class="home" href="#top">
+      <span class="sr-only">{t('nav.home')}</span>
+      <svg class="home-shape" viewBox="0 0 100 100" aria-hidden="true">
+        <path d={mark}></path>
+      </svg>
+      <svg class="home-mark" viewBox="0 0 100 100" aria-hidden="true">
+        <Monogram scale={1.25} />
+      </svg>
+    </a>
+
+    <ul role="list" class="items">
+      <li class="indicator" aria-hidden="true" data-indicator></li>
+      {items.map((item) => (
+        <li>
+          <a href={`#${item.id}`} data-nav-link={item.id}>
+            <Icon name={item.icon} size={22} />
+            <span class="label">{t(item.key)}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="lang" role="group" aria-label={t('lang.label')}>
+      {locales.map((code) => (
+        <a
+          href={homePath(code)}
+          hreflang={code}
+          lang={code}
+          aria-current={code === locale ? 'true' : undefined}
+          data-lang-link
+        >
+          {code.toUpperCase()}
+        </a>
+      ))}
+    </div>
+
+    <ThemeToggle locale={locale} />
+  </nav>
+</header>
+
+<style>
+  .toolbar-wrap {
+    position: fixed;
+    z-index: 50;
+    inset-inline: 0;
+    inset-block-start: var(--space-4);
+    display: flex;
+    justify-content: center;
+    padding-inline: var(--space-3);
+    pointer-events: none;
+  }
+
+  .toolbar {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2);
+    border-radius: var(--corner-full);
+    background: var(--surface-container-high);
+    color: var(--on-surface-variant);
+    box-shadow: var(--elevation-3);
+  }
+
+  .home {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    flex: none;
+    color: var(--on-primary);
+    text-decoration: none;
+  }
+
+  .home svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .home-shape {
+    fill: var(--primary);
+    transition: rotate var(--spring-default-spatial-dur, 500ms) var(--spring-default-spatial, ease);
+  }
+
+  /* Only the cookie turns; the monogram stays upright */
+  .home:hover .home-shape {
+    rotate: 40deg;
+  }
+
+  .items {
+    position: relative;
+    display: flex;
+    margin: 0;
+  }
+
+  .indicator {
+    position: absolute;
+    inset-block: 0;
+    left: 0;
+    width: var(--w, 0px);
+    translate: var(--x, 0px) 0;
+    border-radius: var(--corner-full);
+    background: var(--secondary-container);
+    opacity: var(--o, 0);
+    transition:
+      translate var(--spring-default-spatial-dur, 500ms) var(--spring-default-spatial, ease),
+      width var(--spring-default-spatial-dur, 500ms) var(--spring-default-spatial, ease),
+      opacity 200ms linear;
+  }
+
+  .items a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 44px;
+    padding-inline: var(--space-4);
+    border-radius: var(--corner-full);
+    font-size: var(--label-l);
+    font-variation-settings: 'wght' 560;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      color 200ms linear,
+      background-color 200ms linear;
+  }
+
+  .items a:hover {
+    background: color-mix(in oklab, var(--on-surface) 8%, transparent);
+  }
+
+  .items a[aria-current] {
+    color: var(--on-secondary-container);
+  }
+
+  .items a[aria-current]:hover {
+    background: none;
+  }
+
+  .items :global(.icon) {
+    flex: none;
+  }
+
+  .lang {
+    display: flex;
+    gap: 2px;
+    padding-inline-start: var(--space-1);
+  }
+
+  .lang a {
+    display: grid;
+    place-items: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding-inline: var(--space-3);
+    font-size: var(--label-l);
+    font-variation-settings: 'wght' 640;
+    text-decoration: none;
+    background: var(--surface-container-highest);
+    border-radius: var(--corner-s);
+    transition:
+      border-radius var(--spring-fast-spatial-dur, 300ms) var(--spring-fast-spatial, ease),
+      background-color 200ms linear;
+  }
+
+  .lang a:first-child {
+    border-start-start-radius: 22px;
+    border-end-start-radius: 22px;
+  }
+
+  .lang a:last-child {
+    border-start-end-radius: 22px;
+    border-end-end-radius: 22px;
+  }
+
+  .lang a[aria-current] {
+    background: var(--primary);
+    color: var(--on-primary);
+    border-radius: 22px;
+  }
+
+  .lang a:not([aria-current]):hover {
+    border-radius: var(--corner-m);
+    background: color-mix(in oklab, var(--on-surface) 12%, var(--surface-container-highest));
+  }
+
+  /* Labels only for the active item on medium screens */
+  @media (max-width: 1100px) {
+    .items a {
+      padding-inline: var(--space-3);
+    }
+
+    .items a .label {
+      /* visually hidden, still the link's accessible name */
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .items a[aria-current] .label {
+      position: static;
+      width: auto;
+      height: auto;
+      overflow: visible;
+      clip-path: none;
+    }
+  }
+
+  /* Phones: floating toolbar docks to the bottom, within thumb reach */
+  @media (max-width: 720px) {
+    .toolbar-wrap {
+      inset-block-start: auto;
+      inset-block-end: max(var(--space-3), env(safe-area-inset-bottom));
+      padding-inline: var(--space-2);
+    }
+
+    .home {
+      display: none;
+    }
+
+    .toolbar {
+      gap: var(--space-1);
+      padding: 6px;
+      max-width: 100%;
+    }
+
+    .items a {
+      padding-inline: 7px;
+      gap: 6px;
+    }
+
+    .items a[aria-current] .label {
+      /* visually hidden, still the link's accessible name */
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .lang a {
+      min-width: 38px;
+      padding-inline: var(--space-2);
+    }
+  }
+
+  /* Narrow phones: everything (6 sections, EN/IT, theme) still fits in one bar */
+  @media (max-width: 400px) {
+    .items a {
+      padding-inline: 6px;
+    }
+
+    .lang a {
+      min-width: 36px;
+      padding-inline: 6px;
+    }
+  }
+</style>

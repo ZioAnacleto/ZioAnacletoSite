@@ -1,0 +1,388 @@
+---
+import Icon from './Icon.astro';
+import { experiences } from '@/data/profile';
+import type { Locale } from '@/i18n/config';
+import { useTranslations } from '@/i18n/ui';
+import { durationLabel, formatYearMonth, yearOf } from '@/lib/format';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section id="experience" class="experience" data-section aria-labelledby="experience-title">
+  <div class="container">
+    <h2 id="experience-title" class="title" data-weight-in>
+      {t('experience.title')}
+    </h2>
+
+    <div class="timeline" data-timeline>
+      <svg class="wave" aria-hidden="true" focusable="false">
+        <path class="wave-track" data-wave-track></path>
+        <path class="wave-fill" data-wave-fill></path>
+      </svg>
+      <ol role="list" class="roles">
+        {experiences.map((job) => (
+          <li class:list={['role', { current: job.end === null }]}>
+            <div class="when">
+              <span class="node" aria-hidden="true" />
+              <p class="years">
+                <span>{yearOf(job.start)}</span>
+                <span class="to">{job.end ? yearOf(job.end) : t('experience.present')}</span>
+              </p>
+              <p class="range">
+                <time datetime={job.start}>{formatYearMonth(job.start, locale)}</time>
+                {' – '}
+                {job.end ? (
+                  <time datetime={job.end}>{formatYearMonth(job.end, locale)}</time>
+                ) : (
+                  t('experience.present')
+                )}
+                {job.end && (
+                  <>
+                    <br />
+                    {durationLabel(job.start, job.end, locale)}
+                  </>
+                )}
+              </p>
+            </div>
+
+            <article class="card" aria-labelledby={`role-${job.id}`}>
+              <h3 id={`role-${job.id}`}>{job.role[locale]}</h3>
+              <p class="org">
+                {job.organization[locale]} · {job.city[locale]}
+              </p>
+              {job.products && (
+                <ul role="list" class="tags">
+                  {job.products.map((p) => (
+                    <li>{p}</li>
+                  ))}
+                </ul>
+              )}
+              <p class="summary">{job.summary[locale]}</p>
+              {job.achievements && (
+                <>
+                  <h4>{t('experience.achievements')}</h4>
+                  <ul role="list" class="wins">
+                    {job.achievements[locale].map((a) => (
+                      <li>
+                        <Icon name="ms:check-rounded" size={20} />
+                        <span>{a}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+              {job.projects && (
+                <ul role="list" class="projects">
+                  {job.projects.map((project) => (
+                    <li class="project">
+                      <h4 class="project-title">{project.title[locale]}</h4>
+                      <ul role="list" class="tags">
+                        {project.tags.map((tag) => (
+                          <li>{tag}</li>
+                        ))}
+                      </ul>
+                      <p class="summary">{project.summary[locale]}</p>
+                      <ul role="list" class="wins">
+                        {project.highlights[locale].map((h) => (
+                          <li>
+                            <Icon name="ms:check-rounded" size={20} />
+                            <span>{h}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </article>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .experience {
+    padding-block: var(--space-9);
+  }
+
+  .title {
+    font-size: var(--display-l);
+    letter-spacing: -0.035em;
+    --wght-final: 820;
+    font-variation-settings: 'wght' 820;
+  }
+
+  .timeline {
+    position: relative;
+    margin-block-start: var(--space-8);
+  }
+
+  .roles {
+    --rail: 12.5rem;
+    display: grid;
+    gap: var(--space-8);
+    margin: 0;
+  }
+
+  .wave {
+    position: absolute;
+    inset-block: 0.5rem 0;
+    left: 14px;
+    width: 24px;
+    height: calc(100% - 0.5rem);
+    overflow: visible;
+    pointer-events: none;
+  }
+
+  .wave path {
+    fill: none;
+    stroke-width: 4;
+    stroke-linecap: round;
+  }
+
+  .wave-track {
+    stroke: var(--surface-container-highest);
+  }
+
+  .wave-fill {
+    stroke: var(--primary);
+  }
+
+  .role {
+    position: relative;
+    display: grid;
+    grid-template-columns: var(--rail) minmax(0, 1fr);
+    gap: var(--space-6);
+  }
+
+  .when {
+    position: relative;
+    padding-inline-start: 3.25rem;
+  }
+
+  .node {
+    position: absolute;
+    left: 10px;
+    top: 0.55rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 4px solid var(--primary);
+  }
+
+  .current .node {
+    background: var(--primary);
+    box-shadow: 0 0 0 6px color-mix(in oklab, var(--primary) 22%, transparent);
+  }
+
+  .years {
+    display: grid;
+    font-size: var(--display-s);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+    font-variation-settings:
+      'wght' 820,
+      'wdth' 90;
+  }
+
+  .years .to {
+    font-variation-settings:
+      'wght' 160,
+      'wdth' 110;
+    color: var(--primary);
+  }
+
+  .range {
+    margin-block-start: var(--space-3);
+    font-size: var(--label-l);
+    color: var(--on-surface-variant);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .card {
+    padding: var(--space-6) var(--space-6) var(--space-6);
+    border-radius: var(--corner-xl);
+    background: var(--surface-container-low);
+    max-width: 52rem;
+    transition: border-radius var(--spring-slow-spatial-dur, 900ms) var(--spring-slow-spatial, ease);
+  }
+
+  .current .card {
+    background: var(--surface-container-high);
+  }
+
+  .card:hover {
+    border-radius: var(--corner-2xl);
+  }
+
+  h3 {
+    font-size: var(--display-s);
+    letter-spacing: -0.025em;
+    font-variation-settings: 'wght' 720;
+  }
+
+  .org {
+    margin-block-start: var(--space-2);
+    font-size: var(--title-m);
+    font-variation-settings: 'wght' 520;
+    color: var(--primary);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-block-start: var(--space-4);
+  }
+
+  .tags li {
+    padding: 6px var(--space-3);
+    border-radius: var(--corner-s);
+    background: var(--secondary-container);
+    color: var(--on-secondary-container);
+    font-size: var(--label-m);
+    font-variation-settings: 'wght' 600;
+  }
+
+  .summary {
+    max-width: 68ch;
+    margin-block-start: var(--space-5);
+    color: var(--on-surface-variant);
+  }
+
+  h4 {
+    margin-block-start: var(--space-6);
+    font-size: var(--label-l);
+    font-variation-settings: 'wght' 700;
+    letter-spacing: 0.02em;
+  }
+
+  .wins {
+    display: grid;
+    gap: var(--space-2);
+    margin-block-start: var(--space-3);
+  }
+
+  .wins li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-3);
+    align-items: start;
+  }
+
+  .wins :global(.icon) {
+    margin-block-start: 3px;
+    color: var(--primary);
+  }
+
+  .projects {
+    display: grid;
+    gap: var(--space-2);
+    margin-block-start: var(--space-6);
+  }
+
+  .project {
+    padding: var(--space-5) var(--space-5) var(--space-5);
+    border-radius: var(--corner-l);
+    background: var(--surface-container-lowest);
+    transition: border-radius var(--spring-default-spatial-dur, 500ms)
+      var(--spring-default-spatial, ease);
+  }
+
+  .project:first-child {
+    border-start-start-radius: var(--corner-xl);
+    border-start-end-radius: var(--corner-xl);
+  }
+
+  .project:last-child {
+    border-end-start-radius: var(--corner-xl);
+    border-end-end-radius: var(--corner-xl);
+  }
+
+  .project:hover {
+    border-radius: var(--corner-xl);
+  }
+
+  .project-title {
+    margin: 0;
+    font-size: var(--title-l);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    font-variation-settings: 'wght' 700;
+  }
+
+  .project .tags {
+    margin-block-start: var(--space-3);
+  }
+
+  .project .summary {
+    margin-block-start: var(--space-4);
+  }
+
+  .project .wins {
+    margin-block-start: var(--space-4);
+  }
+
+  @media (max-width: 860px) {
+    .roles {
+      gap: var(--space-7);
+    }
+
+    .role {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+
+    .years {
+      display: flex;
+      gap: 0.35ch;
+      font-size: var(--headline);
+    }
+
+    .years .to::before {
+      content: '– ';
+    }
+
+    .range {
+      margin-block-start: var(--space-1);
+    }
+
+    .card {
+      margin-inline-start: 3.25rem;
+      padding: var(--space-5);
+      border-radius: var(--corner-xl);
+    }
+
+    h3 {
+      font-size: var(--headline);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .card {
+      margin-inline-start: 0;
+    }
+
+    .project {
+      padding: var(--space-4);
+    }
+
+    .wave {
+      display: none;
+    }
+  }
+  @media (max-width: 720px) {
+    .experience {
+      padding-block: var(--space-8) var(--space-6);
+    }
+  }
+</style>

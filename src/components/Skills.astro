@@ -1,0 +1,123 @@
+---
+import { skillGroups } from '@/data/profile';
+import type { Locale } from '@/i18n/config';
+import { useTranslations } from '@/i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section id="skills" class="skills" data-section aria-labelledby="skills-title">
+  <div class="container">
+    <h2 id="skills-title" class="title">
+      {t('skills.title')}
+    </h2>
+
+    <dl class="groups">
+      {skillGroups.map((group) => (
+        <div class="group">
+          <dt>{group.title[locale]}</dt>
+          <dd>
+            <ul role="list" class="chips" data-stagger>
+              {group.items[locale].map((item) => (
+                <li class="chip">{item}</li>
+              ))}
+            </ul>
+          </dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>
+
+<style>
+  .skills {
+    margin: var(--space-3);
+    padding-block: var(--space-9);
+    border-radius: var(--corner-2xl);
+    background: var(--surface-container-low);
+  }
+
+  .title {
+    font-size: var(--display-l);
+    letter-spacing: -0.035em;
+    --wght-final: 820;
+    font-variation-settings: 'wght' 820;
+  }
+
+  .groups {
+    display: grid;
+    gap: var(--space-6);
+    margin-block-start: var(--space-8);
+  }
+
+  .group {
+    display: grid;
+    grid-template-columns: minmax(11rem, 16rem) 1fr;
+    gap: var(--space-5);
+    align-items: baseline;
+  }
+
+  dt {
+    font-size: var(--title-l);
+    font-variation-settings: 'wght' 650;
+    letter-spacing: -0.01em;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .chip {
+    padding: var(--space-3) var(--space-5);
+    border-radius: var(--corner-m);
+    background: var(--surface-container-highest);
+    font-size: var(--body-l);
+    font-variation-settings: 'wght' 520;
+    transition:
+      border-radius var(--spring-fast-spatial-dur, 300ms) var(--spring-fast-spatial, ease),
+      background-color 200ms linear,
+      color 200ms linear,
+      opacity 400ms linear,
+      translate 600ms var(--ease-out);
+  }
+
+  .chip:hover {
+    border-radius: calc(0.5lh + var(--space-3)); /* exactly half the chip height */
+    background: var(--primary);
+    color: var(--on-primary);
+  }
+
+  /* List stagger, only for chips (they appear as a list). Default state is visible. */
+  :global(.js) [data-stagger]:not(.is-in) .chip {
+    opacity: 0;
+    translate: 0 0.75rem;
+  }
+
+  [data-stagger] .chip {
+    transition-delay: calc(var(--i, 0) * 60ms);
+  }
+
+  [data-stagger].is-in .chip:hover {
+    transition-delay: 0ms;
+  }
+
+  @media (max-width: 720px) {
+    .skills {
+      margin: var(--space-2);
+      padding-block: var(--space-8);
+      border-radius: var(--corner-xl-plus);
+    }
+
+    .group {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+  }
+</style>

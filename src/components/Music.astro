@@ -1,0 +1,222 @@
+---
+import MorphShape from './MorphShape.astro';
+import { interests, music } from '@/data/profile';
+import type { Locale } from '@/i18n/config';
+import { useTranslations, type UiKey } from '@/i18n/ui';
+import type { ShapeName } from '@/lib/shapes';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const pads: { id: string; key: UiKey; shapes: ShapeName[] }[] = [
+  { id: 'timpani', key: 'music.pad.timpani', shapes: ['circle', 'cookie', 'circle', 'burst'] },
+  { id: 'snare', key: 'music.pad.snare', shapes: ['cookie', 'sunny', 'cookie', 'squircle'] },
+  {
+    id: 'woodblock',
+    key: 'music.pad.woodblock',
+    shapes: ['squircle', 'gem', 'squircle', 'clover'],
+  },
+  { id: 'triangle', key: 'music.pad.triangle', shapes: ['clover', 'flower', 'clover', 'burst'] },
+];
+---
+
+<section id="music" class="music" data-section aria-labelledby="music-title">
+  <div class="container inner">
+    <div class="story">
+      <h2 id="music-title" class="title">
+        {t('music.title')}
+      </h2>
+      <ol role="list" class="acts">
+        {music.map((act) => (
+          <li>
+            <h3>
+              {act.title[locale]}
+              {act.period && <span class="period">{act.period}</span>}
+            </h3>
+            <p>{act.body[locale]}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="interests">
+        <h3>{t('music.interests')}</h3>
+        <p>{interests[locale]}</p>
+      </div>
+    </div>
+
+    <div class="kit" data-kit>
+      <h3 class="kit-title" id="pads-title">
+        {t('music.pads.title')}
+      </h3>
+      <p class="kit-hint" id="pads-hint">
+        {t('music.pads.hint')}
+      </p>
+      <div class="pads" role="group" aria-labelledby="pads-title" aria-describedby="pads-hint">
+        {pads.map((pad, i) => (
+          <figure class="pad">
+            <MorphShape
+              shapes={pad.shapes}
+              label={`${t('music.pad.play')}: ${t(pad.key)}`}
+              tone="tertiary"
+              scale={0.9}
+              data-pad={pad.id}
+            >
+              <text x="50" y="50" text-anchor="middle" dominant-baseline="central" class="key">
+                {i + 1}
+              </text>
+            </MorphShape>
+            <figcaption>{t(pad.key)}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* In the dark scheme the field turns bright, like the contact footer, instead of muddy amber. */
+  .music {
+    --field: light-dark(var(--tertiary-container), var(--tertiary));
+    --ink: light-dark(var(--on-tertiary-container), var(--on-tertiary));
+    --panel: light-dark(
+      color-mix(in oklab, var(--surface-container-lowest) 55%, var(--tertiary-container)),
+      var(--on-tertiary)
+    );
+    margin: var(--space-3);
+    padding-block: var(--space-9);
+    border-radius: var(--corner-2xl);
+    background: var(--field);
+    color: var(--ink);
+  }
+
+  .inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .title {
+    font-size: var(--display-l);
+    letter-spacing: -0.035em;
+    --wght-final: 820;
+    font-variation-settings: 'wght' 820;
+    max-width: 12ch;
+  }
+
+  .acts {
+    display: grid;
+    gap: var(--space-6);
+    margin: var(--space-7) 0 0;
+  }
+
+  h3 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-3);
+    font-size: var(--headline);
+    letter-spacing: -0.01em;
+    font-variation-settings: 'wght' 700;
+  }
+
+  .period {
+    font-size: var(--label-l);
+    font-variation-settings: 'wght' 600;
+    font-variant-numeric: tabular-nums;
+    padding: 2px var(--space-3);
+    border-radius: var(--corner-s);
+    background: color-mix(in oklab, var(--ink) 12%, var(--field));
+  }
+
+  .acts p,
+  .interests p {
+    max-width: 58ch;
+    margin-block-start: var(--space-2);
+  }
+
+  .interests {
+    margin-block-start: var(--space-7);
+    padding: var(--space-5) var(--space-6);
+    border-radius: var(--corner-xl);
+    background: color-mix(in oklab, var(--ink) 7%, var(--field));
+  }
+
+  .kit {
+    color: var(--on-tertiary-container);
+    position: sticky;
+    top: 7rem;
+    padding: var(--space-6);
+    border-radius: var(--corner-2xl);
+    background: var(--panel);
+  }
+
+  .kit-title {
+    font-size: var(--title-l);
+  }
+
+  .kit-hint {
+    margin-block-start: var(--space-2);
+    font-size: var(--body-m);
+    max-width: 40ch;
+  }
+
+  .pads {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5);
+    margin-block-start: var(--space-6);
+  }
+
+  .pad {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-2);
+  }
+
+  .pad :global(.morph) {
+    max-width: 11rem;
+  }
+
+  .key {
+    font-size: 22px;
+    font-variation-settings: 'wght' 700;
+    fill: var(--on-tertiary);
+    opacity: 0.8;
+  }
+
+  figcaption {
+    font-size: var(--label-l);
+    font-variation-settings: 'wght' 600;
+  }
+
+  @media (max-width: 960px) {
+    .inner {
+      grid-template-columns: 1fr;
+    }
+
+    .kit {
+      position: static;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .music {
+      margin: var(--space-2);
+      padding-block: var(--space-8);
+      border-radius: var(--corner-xl-plus);
+    }
+
+    .kit {
+      padding: var(--space-5);
+      border-radius: var(--corner-xl);
+    }
+
+    .pads {
+      gap: var(--space-4);
+    }
+  }
+</style>
