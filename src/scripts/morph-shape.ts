@@ -11,6 +11,19 @@ import { springs } from '@/lib/motion';
 import { Spring, prefersReducedMotion } from './spring';
 
 const BEATS_PER_MORPH = 4;
+/** Shortest beat accepted (ms): guards against a bad value turning the loop into a spin. */
+const MIN_BEAT_MS = 200;
+
+/**
+ * Reads a CSS time ("536ms", ".536s") as milliseconds. Production CSS is minified,
+ * which rewrites 536ms as .536s, so the unit must be honoured.
+ */
+function cssDurationMs(raw: string, fallback: number): number {
+  const match = raw.trim().match(/^(-?[\d.]+)(ms|s)$/i);
+  if (!match) return fallback;
+  const value = parseFloat(match[1]!) * (match[2]!.toLowerCase() === 's' ? 1000 : 1);
+  return Number.isFinite(value) && value >= MIN_BEAT_MS ? value : fallback;
+}
 
 class MorphShape {
   private shapes: ShapeName[];
@@ -47,8 +60,10 @@ class MorphShape {
     this.rotation = new Spring(0, reduced ? springs.defaultEffects : springs.slowSpatial);
     this.pulse = new Spring(1, springs.fastSpatial);
     this.playing = host.dataset.autoplay !== undefined && !reduced;
-    this.beatMs =
-      parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--beat')) || 536;
+    this.beatMs = cssDurationMs(
+      getComputedStyle(document.documentElement).getPropertyValue('--beat'),
+      536,
+    );
 
     this.bindInput();
     this.observe();
